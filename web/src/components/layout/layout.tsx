@@ -1,7 +1,8 @@
 import React from "react";
 import Head from 'next/head'
 import { Menu } from "../menu/menu";
-
+import { Header } from "../header/header";
+import './layout.module.css'
 type LayoutProps = React.PropsWithChildren;
 
 export const Layout: React.FunctionComponent<LayoutProps> = (props) => {
@@ -15,9 +16,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = (props) => {
             </Head>
             <main>
                 <div className="main">
-                    <div className="header">
-                        <p>Identity Management - Web</p>
-                    </div>
+                    <Header></Header>
                     <Menu></Menu>
                     <div className="content">
                         {props.children}

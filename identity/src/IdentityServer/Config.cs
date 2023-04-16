@@ -21,7 +21,7 @@ public static class Config
             {
         new Client
         {
-            ClientId = "client",
+            ClientId = "webclient",
 
             // no interactive user, use the clientid/secret for authentication
             AllowedGrantTypes = GrantTypes.ClientCredentials,

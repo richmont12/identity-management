@@ -1,13 +1,23 @@
 import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react"
+import { authOptions } from "./../../pages/api/auth/[...nextauth]"
 import './login.module.css'
+
 export const Login: React.FunctionComponent = () => {
+    const { data: session } = useSession();
+    if (session) {
+        return (
+            <div className="login">
+                Hello {session.user.email}
+                <button onClick={() => signOut()}>Logout</button>
+            </div>
+        );
+    }
+
     return (
         <div className="login">
-            <input type="text" placeholder="Enter Username" name="uname" required />
-
-            <input type="password" placeholder="Enter Password" name="psw" required />
-
-            <button type="submit">Login</button>
+            Hello someone
+            <button onClick={() => signIn()}>Login</button>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
+using IdentityModel;
 
 namespace IdentityServer;
 
@@ -16,7 +17,7 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
-            new ApiScope(name: "dataapi", displayName: "Data Api")
+            new ApiScope(name: "dataapi1", displayName: "Data Api 1")
         };
 
     public static IEnumerable<Client> Clients =>
@@ -36,7 +37,23 @@ public static class Config
                 },
 
                 // scopes that client has access to
-                AllowedScopes = { "dataapi" }
+                AllowedScopes = { "dataapi1" }
+            },
+            new Client
+            {
+                ClientId = "machineclientdelegation",
+
+                // no interactive user, use the clientid/secret for authentication
+                AllowedGrantTypes = new[] { OidcConstants.GrantTypes.TokenExchange },
+
+                // secret for authentication
+                ClientSecrets =
+                {
+                    new Secret("secret".Sha256())
+                },
+
+                // scopes that client has access to
+                AllowedScopes = { "dataapi1" }
             },
             new Client
             {
@@ -57,7 +74,8 @@ public static class Config
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "dataapi1"
                 }
             }
         };

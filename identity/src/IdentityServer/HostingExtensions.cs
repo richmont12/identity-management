@@ -1,3 +1,4 @@
+using Duende.IdentityServer.Test;
 using Serilog;
 
 namespace IdentityServer;
@@ -12,13 +13,18 @@ internal static class HostingExtensions
             {
                 // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
                 options.EmitStaticAudienceClaim = true;
+                // to fulfill RFC 9068
+                // options.EmitScopesAsSpaceDelimitedStringInJwt = true; 
             })
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
+            .AddInMemoryApiResources(Config.ApiResources)
             .AddInMemoryClients(Config.Clients)
             .AddTestUsers(TestUsers.Users)
             .AddExtensionGrantValidator<TokenExchangeGrantValidator>()
-            .AddProfileService<ProfileService>();
+            .AddProfileService<ProfileService>()
+            ;
+        
 
         return builder.Build();
     }

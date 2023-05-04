@@ -20,6 +20,15 @@ public static class Config
             new ApiScope(name: "dataapi1", displayName: "Data Api 1")
         };
 
+    public static IEnumerable<ApiResource> ApiResources =>
+        new ApiResource[]
+        {
+            new ApiResource(name: "dataapi1", displayName: "Data Api 1")
+            {
+                Scopes = { "dataapi1" }
+            }
+        };
+
     public static IEnumerable<Client> Clients =>
         new Client[]
         {
@@ -75,6 +84,7 @@ public static class Config
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email,
                     "dataapi1"
                 }
             }

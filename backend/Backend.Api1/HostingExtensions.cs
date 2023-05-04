@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
 namespace Backend.Api1;
@@ -7,16 +10,18 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
-        
+
         builder.Services
-            .AddAuthentication("Bearer")
-            .AddJwtBearer("Bearer", 
-                 options =>
-            {
-                options.Authority = "https://localhost:5001";
-                options.Audience = "dataapi1";
-            })
-            .AddAuthorization();
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(
+                options =>
+                {
+                    options.Authority = "https://localhost:5001";
+                    options.Audience = "dataapi1";
+                });
+        
+        builder.Services.AddAuthorization();
+     
 
         return builder.Build();
     }
@@ -26,9 +31,9 @@ internal static class HostingExtensions
         app.UseSerilogRequestLogging();
         
         app.UseDeveloperExceptionPage();
-
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(x => x.MapControllers().RequireAuthorization());

@@ -7,6 +7,16 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
+        
+        builder.Services
+            .AddAuthentication("Bearer")
+            .AddJwtBearer("Bearer", 
+                 options =>
+            {
+                options.Authority = "https://localhost:5001";
+                options.Audience = "dataapi1";
+            })
+            .AddAuthorization();
 
         return builder.Build();
     }
@@ -14,11 +24,8 @@ internal static class HostingExtensions
     public static WebApplication ConfigurePipeline(this WebApplication app)
     {
         app.UseSerilogRequestLogging();
-
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
+        
+        app.UseDeveloperExceptionPage();
 
         app.UseStaticFiles();
         app.UseRouting();

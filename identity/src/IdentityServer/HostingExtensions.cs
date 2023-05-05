@@ -11,12 +11,13 @@ internal static class HostingExtensions
 {
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddRazorPages();
+        builder.Services
+            .AddControllersWithViews();
 
         builder.Services.AddDbContext<IdentityDbContext>(
             options => options.UseNpgsql(
                 "Host=localhost;Database=Identity;Username=postgres;Password=docker",
-                opt => 
+                opt =>
                     opt.MigrationsAssembly(Assembly.GetAssembly(typeof(HostingExtensions))!.GetName().Name))
         );
 
@@ -24,13 +25,18 @@ internal static class HostingExtensions
             .AddEntityFrameworkStores<IdentityDbContext>()
             .AddDefaultTokenProviders();
 
-        builder.Services.AddIdentityServer(options =>
-            {
-                // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
-                options.EmitStaticAudienceClaim = true;
-                // to fulfill RFC 9068
-                // options.EmitScopesAsSpaceDelimitedStringInJwt = true; 
-            })
+        builder.Services.AddIdentityServer(
+                // options =>
+                // {
+                //     // https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/api_scopes#authorization-based-on-scopes
+                //     options.EmitStaticAudienceClaim = true;
+                //     // to fulfill RFC 9068
+                //     // options.EmitScopesAsSpaceDelimitedStringInJwt = true; 
+                // }
+            )
+            .AddDeveloperSigningCredential(
+                false
+            )
             .AddInMemoryIdentityResources(Config.IdentityResources)
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources)
@@ -62,7 +68,13 @@ internal static class HostingExtensions
         app.UseIdentityServer();
 
         app.UseAuthorization();
-        app.MapRazorPages().RequireAuthorization();
+        app.UseEndpoints(
+            endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();
+            }
+        );
 
         return app;
     }
@@ -92,9 +104,17 @@ internal static class HostingExtensions
 
             IdentityResult result = userMgr.CreateAsync(
                     user,
-                    "alice"
+                    "Alice123$"
                 )
                 .Result;
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(
+                    result.Errors.First()
+                        .Description
+                );
+            }
         }
     }
 }

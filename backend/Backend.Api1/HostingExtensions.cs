@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Logging;
 using Serilog;
 
 namespace Backend.Api1;
@@ -10,14 +11,16 @@ internal static class HostingExtensions
     public static WebApplication ConfigureServices(this WebApplicationBuilder builder)
     {
         builder.Services.AddControllers();
+        builder.Services.AddHttpClient();
 
         builder.Services
             .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme,
                 options =>
                 {
                     options.Authority = "https://localhost:5001";
                     options.Audience = "dataapi1";
+                    // options.RequireHttpsMetadata = false;
                 });
         
         builder.Services.AddAuthorization();
@@ -31,6 +34,10 @@ internal static class HostingExtensions
         app.UseSerilogRequestLogging();
         
         app.UseDeveloperExceptionPage();
+        
+        IdentityModelEventSource.ShowPII = true;   
+        // System.Net.ServicePointManager.ServerCertificateValidationCallback += 
+        //     (sender, certificate, chain, sslPolicyErrors) => true;
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthentication();

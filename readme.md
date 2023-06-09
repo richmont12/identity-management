@@ -5,7 +5,6 @@ A repository to show how identity management using OIDC works when using:
 * duende identity server https://docs.duendesoftware.com/
 * aspnetcore
 
-
 ## Folder Structure
 * web: contains the web frontend build with nextjs and react
 * backend: contains the apis build with apsnetcore

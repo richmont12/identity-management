@@ -8,8 +8,7 @@ export default function Welcome() {
         fetch('http://localhost:3000/api/mightydata')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
-                setMighty(data.text);
+                setMighty(data.mightyData);
             })
             .catch((err) => {
                 setMighty("you are not authorized");

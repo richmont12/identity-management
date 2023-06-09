@@ -18,7 +18,8 @@ public static class Config
     public static IEnumerable<ApiScope> ApiScopes =>
         new ApiScope[]
         {
-            new ApiScope(name: "dataapi1", displayName: "Data Api 1")
+            new ApiScope(name: "dataapi1", displayName: "Data Api 1"),
+            new ApiScope(name: "dataapi2", displayName: "Data Api 2")
         };
 
     public static IEnumerable<ApiResource> ApiResources =>
@@ -27,6 +28,10 @@ public static class Config
             new ApiResource(name: "dataapi1", displayName: "Data Api 1")
             {
                 Scopes = { "dataapi1" }
+            },
+            new ApiResource(name: "dataapi2", displayName: "Data Api 2")
+            {
+                Scopes = { "dataapi2" }
             }
         };
 
@@ -63,7 +68,7 @@ public static class Config
                 },
 
                 // scopes that client has access to
-                AllowedScopes = { "dataapi1" }
+                AllowedScopes = { "dataapi2" }
             },
             new Client
             {

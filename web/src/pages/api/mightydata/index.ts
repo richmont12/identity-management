@@ -23,7 +23,7 @@ async function httpGet(token) {
         const options = {
             hostname: 'localhost',
             path: '/api/backend/1/mighty',
-            port: 7262,
+            port: 6001,
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + token

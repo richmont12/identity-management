@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Backend.Api1": {
+    "Backend.Api2": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:6002",

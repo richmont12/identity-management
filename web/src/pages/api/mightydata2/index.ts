@@ -4,7 +4,7 @@ export default async function handler(req: any, res: any) {
     const token = await getToken({ req })
     if (token) {
         // Signed in
-        let mightyData = await httpGet(token.access_token, '/api/backend/1/mighty')
+        let mightyData = await httpGet(token.access_token, '/api/backend/1/mighty2')
         res.status(200).json({ text: 'mighty-data-next-js', mightyData: mightyData });
     } else {
         // Not Signed in
@@ -12,7 +12,6 @@ export default async function handler(req: any, res: any) {
     }
     res.end()
 }
-
 
 
 const http = require('https');

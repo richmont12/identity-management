@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityModel.Client;
@@ -32,6 +33,17 @@ public class MightyDataController : ControllerBase
             Api1Data = "Api 1 Data that is mighty"
         });
     }
+    
+    [HttpGet("api/backend/1/mighty2")]
+    public async Task<ActionResult<MightyData>> GetMightyData2()
+    {
+        var clientWithExchangedToken = await GetClientWithExchangedTokenAsync();
+        var mightyData =
+            await clientWithExchangedToken
+                .GetFromJsonAsync<MightyData>("https://localhost:6002/api/backend/2/mighty");
+        return Ok(mightyData);
+    }
+    
 
     private async Task<HttpClient> GetClientWithExchangedTokenAsync()
     {

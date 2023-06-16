@@ -41,7 +41,6 @@ internal static class HostingExtensions
             .AddInMemoryApiScopes(Config.ApiScopes)
             .AddInMemoryApiResources(Config.ApiResources)
             .AddInMemoryClients(Config.Clients)
-            //.AddTestUsers(TestUsers.Users)
             .AddExtensionGrantValidator<TokenExchangeGrantValidator>()
             .AddProfileService<ProfileService>()
             .AddAspNetIdentity<IdentityUser>()

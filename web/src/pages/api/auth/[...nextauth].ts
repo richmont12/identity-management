@@ -34,7 +34,7 @@ export const authOptions = {
       authorization: {
         params: {
           scope:
-            "openid profile",
+            "openid profile dataapi1",
           grant_type: "authorization_code",
           authorizationUrl: `https://${oidcDomain}/connect/authorize?response_type=code`,
         },

@@ -24,7 +24,11 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Unhandled exception");
+    string type = ex.GetType().Name;
+    if (type.Equals("StopTheHostException", StringComparison.Ordinal))
+    {
+        throw;
+    }
 }
 finally
 {

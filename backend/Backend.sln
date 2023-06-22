@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Api1", "Backend.Api1\Backend.Api1.csproj", "{FCD19A0B-8A53-458D-AF16-9A91171F9621}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend.Api2", "Backend.Api2\Backend.Api2.csproj", "{FAEB6355-647E-4153-9788-E15C2EAC6F0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCD19A0B-8A53-458D-AF16-9A91171F9621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD19A0B-8A53-458D-AF16-9A91171F9621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCD19A0B-8A53-458D-AF16-9A91171F9621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD19A0B-8A53-458D-AF16-9A91171F9621}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAEB6355-647E-4153-9788-E15C2EAC6F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAEB6355-647E-4153-9788-E15C2EAC6F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAEB6355-647E-4153-9788-E15C2EAC6F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAEB6355-647E-4153-9788-E15C2EAC6F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

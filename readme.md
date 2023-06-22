@@ -20,3 +20,7 @@ A repository to show how identity management using OIDC works when using:
   * `dotnet tool restore`
   * `cd src/IdentityServer`
   * `dotnet ef database update`
+* Start Identity Server
+* Start Api1
+* Start Api2
+* Start Web frontend
